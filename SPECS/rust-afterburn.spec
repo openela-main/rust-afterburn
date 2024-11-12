@@ -7,8 +7,8 @@
 %global crate afterburn
 
 Name:           rust-%{crate}
-Version:        5.5.1
-Release:        2%{?dist}
+Version:        5.6.0
+Release:        1%{?dist}
 Summary:        Simple cloud provider agent (RHEL CoreOS only)
 
 # Upstream license specification: Apache-2.0
@@ -19,7 +19,6 @@ Source1:        https://github.com/coreos/%{crate}/releases/download/v%{version}
 # Re-add support for "ec2" and "gce" providers, since RHCOS nodes installed
 # from OCP 4.1 and 4.2 bootimages still call them by those names
 Patch0:         legacy-providers.patch
-Patch1:         gcp-hostname.patch
 
 ExclusiveArch:  %{rust_arches}
 %if 0%{?rhel} && !0%{?eln}
@@ -105,14 +104,7 @@ to run in the initramfs on boot.
 %autosetup -n %{crate}-%{version_no_tilde} -p1
 %if 0%{?rhel} && !0%{?eln}
 tar xvf %{SOURCE1}
-mkdir -p .cargo
-cat >.cargo/config << EOF
-[source.crates-io]
-replace-with = "vendored-sources"
-
-[source.vendored-sources]
-directory = "vendor"
-EOF
+%cargo_prep -v vendor
 %else
 %cargo_prep
 %endif
@@ -148,6 +140,9 @@ cp -a dracut/* %{buildroot}%{dracutmodulesdir}
 %endif
 
 %changelog
+* Tue Jun 25 2024 Steven Presti <spresti@redhat.com> - 5.6.0-1
+- New release
+
 * Thu Feb 1 2024 Michael Nguyen <mnguyen@redhat.com> - 5.5.1-2
 - Add gcp-hostname.patch
 

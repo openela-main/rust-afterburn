@@ -1,16 +1,25 @@
+From c3fda955572ae6f6e9101fb15f62dee8d323e508 Mon Sep 17 00:00:00 2001
+From: Steven Presti <spresti@redhat.com>
+Date: Tue, 25 Jun 2024 10:16:14 -0400
+Subject: [PATCH] metadata: add legacy-providers
+
+---
+ src/metadata.rs | 2 ++
+ 1 file changed, 2 insertions(+)
+
 diff --git a/src/metadata.rs b/src/metadata.rs
-index f27dc7e..4562459 100644
+index b89bf5b..e5021f7 100644
 --- a/src/metadata.rs
 +++ b/src/metadata.rs
-@@ -51,6 +51,7 @@ pub fn fetch_metadata(provider: &str) -> Result<Box<dyn providers::MetadataProvi
-     match provider {
+@@ -53,6 +53,7 @@ pub fn fetch_metadata(provider: &str) -> Result<Box<dyn providers::MetadataProvi
+         "akamai" => box_result!(AkamaiProvider::try_new()?),
          "aliyun" => box_result!(AliyunProvider::try_new()?),
          "aws" => box_result!(AwsProvider::try_new()?),
 +        "ec2" => box_result!(AwsProvider::try_new()?),
          "azure" => box_result!(Azure::try_new()?),
          "azurestack" => box_result!(AzureStack::try_new()?),
          "cloudstack-metadata" => box_result!(CloudstackNetwork::try_new()?),
-@@ -58,6 +59,7 @@ pub fn fetch_metadata(provider: &str) -> Result<Box<dyn providers::MetadataProvi
+@@ -60,6 +61,7 @@ pub fn fetch_metadata(provider: &str) -> Result<Box<dyn providers::MetadataProvi
          "digitalocean" => box_result!(DigitalOceanProvider::try_new()?),
          "exoscale" => box_result!(ExoscaleProvider::try_new()?),
          "gcp" => box_result!(GcpProvider::try_new()?),
@@ -18,3 +27,6 @@ index f27dc7e..4562459 100644
          "hetzner" => box_result!(HetznerProvider::try_new()?),
          // IBM Cloud - VPC Generation 2.
          "ibmcloud" => box_result!(IBMGen2Provider::try_new()?),
+-- 
+2.43.2
+
