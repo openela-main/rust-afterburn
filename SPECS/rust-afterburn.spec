@@ -7,7 +7,7 @@
 %global crate afterburn
 
 Name:           rust-%{crate}
-Version:        5.6.0
+Version:        5.7.0
 Release:        1%{?dist}
 Summary:        Simple cloud provider agent (RHEL CoreOS only)
 
@@ -105,6 +105,8 @@ to run in the initramfs on boot.
 %if 0%{?rhel} && !0%{?eln}
 tar xvf %{SOURCE1}
 %cargo_prep -v vendor
+# avoid brp-mangle-shebangs error from sources with executable bit            
+chmod -x vendor/ipnet/src/*.rs
 %else
 %cargo_prep
 %endif
@@ -140,6 +142,9 @@ cp -a dracut/* %{buildroot}%{dracutmodulesdir}
 %endif
 
 %changelog
+* Fri Sep 27 2024 Yasmin Valim <ydesouza@redhat.com> - 5.7.0-1
+- New release
+
 * Tue Jun 25 2024 Steven Presti <spresti@redhat.com> - 5.6.0-1
 - New release
 
