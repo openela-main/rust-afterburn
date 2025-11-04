@@ -7,7 +7,7 @@
 %global crate afterburn
 
 Name:           rust-%{crate}
-Version:        5.7.0
+Version:        5.9.0
 Release:        1%{?dist}
 Summary:        Simple cloud provider agent (RHEL CoreOS only)
 
@@ -142,6 +142,9 @@ cp -a dracut/* %{buildroot}%{dracutmodulesdir}
 %endif
 
 %changelog
+* Wed Oct 08 2025 Pragyan Poudyal <ppoudyal@redhat.com> - 5.9.0-1
+- New release
+
 * Fri Sep 27 2024 Yasmin Valim <ydesouza@redhat.com> - 5.7.0-1
 - New release
 
