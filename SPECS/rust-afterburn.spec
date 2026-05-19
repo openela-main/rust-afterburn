@@ -6,7 +6,7 @@
 %global crate afterburn
 
 Name:           rust-afterburn
-Version:        5.9.0
+Version:        5.10.0
 Release:        1%{?dist}
 Summary:        Simple cloud provider agent
 
@@ -152,6 +152,9 @@ cp -a dracut/* %{buildroot}%{dracutmodulesdir}
 %endif
 
 %changelog
+* Thu Oct 16 2025 Michael Armijo <marmijo@redhat.com> - 5.10.0-1
+- new version
+
 * Fri Jul 11 2025 Steven Presti <spresti@redhat.com> - 5.9.0-1
 - new version
 
